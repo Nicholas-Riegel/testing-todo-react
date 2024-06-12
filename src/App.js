@@ -3,7 +3,7 @@ import {useState} from 'react';
 
 function App() {
 
-	const initialTodoState = {text: ''};
+	const initialTodoState = {text: '', completed: false};
 	const initalTodosArrayState = [];
 
 	const [todo, setTodo] = useState(initialTodoState);
@@ -14,8 +14,8 @@ function App() {
 		setTodo(initialTodoState);
 	}
 
-	const handleDeleteAll = () => {
-		setTodosArray(initalTodosArrayState);
+	const handleDelete = (todo) => {
+		setTodosArray(todosArray.filter((x) => x !== todo));
 	}
 
 	return (
@@ -31,13 +31,20 @@ function App() {
 
 			<button onClick={handleAdd}>Add</button>
 			
-			<ul>
-				{todosArray.map((todo, i) => (
-					<div key={i}>{todo.text}</div>
+			<div>
+				{todosArray.map((item, i) => (
+					<div key={i}>
+						<input
+							type="checkbox"
+							checked={item.completed}
+							onChange={(e) => setTodosArray(todosArray.map((x) => x === item ? {text: item.text, completed: e.target.checked} : x))}
+						/>
+						<span style={{textDecoration: item.completed ? 'line-through' : 'none'}}>{item.text}</span>
+						<button onClick={()=>handleDelete(item)}>Delete</button>
+					</div>
 				))}
-			</ul>
+			</div>
 
-			<button onClick={handleDeleteAll}>Delete all</button>
 		</div>
 	);
 }
