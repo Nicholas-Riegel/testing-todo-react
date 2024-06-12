@@ -19,21 +19,13 @@ function App() {
 	}
 
 	return (
-		<div className="App">
+		<div id="todos-wrapper">
 
 			<h1>Todos</h1>
 			
-			<input 
-				data-testid='todo-input'
-				type="text" 
-				value={todo.text} 
-				onChange={(e) => setTodo({text: e.target.value})} />
-
-			<button onClick={handleAdd}>Add</button>
-			
-			<div>
+			<div id='todos-container'>
 				{todosArray.map((item, i) => (
-					<div key={i}>
+					<div key={i} id='todo'>
 						<input
 							type="checkbox"
 							checked={item.completed}
@@ -43,8 +35,17 @@ function App() {
 						<button onClick={()=>handleDelete(item)}>Delete</button>
 					</div>
 				))}
-			</div>
 
+				<div id='add-todo-container'>
+					<input 
+						data-testid='todo-input'
+						type="text" 
+						value={todo.text} 
+						onChange={(e) => setTodo({text: e.target.value})} />
+
+					<button onClick={handleAdd}>Add</button>
+				</div>
+			</div>
 		</div>
 	);
 }
