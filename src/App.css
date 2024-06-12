@@ -48,6 +48,11 @@ button{
     margin-left: 0.5rem;
 }
 
+button:hover{
+    background-color: #2b3a78;
+    cursor: pointer;
+}
+
 #todo {
     display: flex;
     width: 100%;
